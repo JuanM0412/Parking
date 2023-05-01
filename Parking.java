@@ -3,7 +3,6 @@ class Parqueadero {
     private static int totalSpaces = 6;
     static String[][] occupiedSpacesByCars = {{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""}};
     static int[] occupiedSpaces = {0, 0, 0, 0, 0, 0};
-    // static int casilla = (int)(Math.random()*6);
 
     public Parqueadero(){
         this.modelo = "";
@@ -26,7 +25,6 @@ class Parqueadero {
         this.cedula = ce.toUpperCase();
     }
 
-
     public String getModelo(){
         return this.modelo;
     }
@@ -48,7 +46,8 @@ class Parqueadero {
             occupiedSpaces[casilla] = 1;
             return casilla;
 
-        } else{
+        } 
+        else{
             return asignarCasillas();
         }
     }
@@ -76,10 +75,12 @@ class Parqueadero {
             if(cont.equals(p)){
                 alm = i;
                 break;
-            }else{
+            }
+            else{
                 alm = -1;
             }
         }
+
         return alm;
     }
 
@@ -90,15 +91,16 @@ class Parqueadero {
             if(cont.equals(ce)){
                 alm = occupiedSpacesByCars[i][3];
                 break;
-            }else{
+            }
+            else{
                 alm = "No se ha encontrado la cedula";
             }
         }
+
         return alm;
     }
 
     public static int inputVerification(String p){
-
         boolean letter = true;
         boolean numbers = true;
         int flag = 0;
@@ -106,7 +108,8 @@ class Parqueadero {
 
         if(p.length() == 6){
             flag = 1;
-        }   else {
+        }
+        else {
             flag = -1;
         }
 
@@ -117,10 +120,12 @@ class Parqueadero {
                     if (a >='A' && a<='Z'){
                         letter = true;
                         flag = 1;
-                    } else {
+                    } 
+                    else {
                         letter = false;
                     }
-                } else {
+                } 
+                else {
                     flag = -2;
                 }
             }
@@ -133,10 +138,12 @@ class Parqueadero {
                     if (a >='0' && a<='9'){
                         numbers = true;
                         flag = 1;
-                    } else {
+                    } 
+                    else {
                         numbers = false;
                     }
-                } else
+                } 
+                else
                     flag = -3;
             }
         }
