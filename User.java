@@ -1,8 +1,9 @@
 public class User {
-    private int meansOfTransport, card;
+    private String card;
+    private int meansOfTransport;
 
     public User(){
-        this.card = 100;
+        this.card = "";
         this.meansOfTransport = 100;
     }
 
@@ -10,7 +11,7 @@ public class User {
         this.meansOfTransport = transport;
     }
 
-    public void setCard(int card){
+    public void setCard(String card){
         this.card = card;
     }
 
@@ -18,7 +19,20 @@ public class User {
         return this.meansOfTransport;
     }
 
-    public int getCard(){
+    public String getCard(){
         return this.card;
+    }
+
+    public boolean checkCard(String card){
+        for(char digit: card.toCharArray()){
+            if(!(digit >= '0' && digit <= 9)){
+                return false;
+            }
+        }
+
+        if(card.length() < 8)
+            return false;
+
+        return true;
     }
 }

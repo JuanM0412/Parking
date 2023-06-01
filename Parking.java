@@ -1,153 +1,63 @@
-class Parqueadero {
-    private String modelo, placa, color,cedula;
-    private static int totalSpaces = 6;
-    static String[][] occupiedSpacesByCars = {{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""},{"","","",""}};
-    static int[] occupiedSpaces = {0, 0, 0, 0, 0, 0};
+public class Parking {
+    private int freeSpacesC, occupiedSpacesC, freeSpacesM, occupiedSpacesM;
+    private int carSpaces[], motorcycleSpaces[];
 
-    public Parqueadero(){
-        this.modelo = "";
-        this.placa = "";
-        this.color = "";
-        this.cedula = "";
-    }
-
-    public void setModelo(String m){
-        this.modelo = m.toUpperCase();
-    }
-    public void setPlaca(String p){
-        this.placa = p;
-    }
-    public void setColor(String c){
-        this.color = c.toUpperCase();
+    public Parking(){
+        this.freeSpacesC = 0;
+        this.occupiedSpacesC = 0;
+        this.freeSpacesM = 0;
+        this.occupiedSpacesM = 0;
+        this.motorcycleSpaces = new int[0]; 
+        this.carSpaces = new int[0]; 
     }
 
-    public void setCedula(String ce){
-        this.cedula = ce.toUpperCase();
-    }
+    public void setParking(int car, int mot){
+        this.carSpaces = new int[car];
+        this.motorcycleSpaces = new int[mot];
+        for(int i = 0; i < car; i++){
+            carSpaces[i] = 0;
+        }
 
-    public String getModelo(){
-        return this.modelo;
-    }
-    public String getPlaca(){
-        return this.placa;
-    }
-    public String getColor(){
-        return this.color;
-    }
-    public String getCedula(){
-        return this.cedula;
-    }
-
-    public static int asignarCasillas(){
-
-        int casilla = (int)(Math.random()*6);
-
-        if(occupiedSpaces[casilla] == 0){
-            occupiedSpaces[casilla] = 1;
-            return casilla;
-
-        } 
-        else{
-            return asignarCasillas();
+        for(int i = 0; i < mot; i++){
+            motorcycleSpaces[i] = 0;
         }
     }
 
-    public static int quitarCasillas(int ocu){
-        occupiedSpacesByCars[ocu][0] = "";
-        occupiedSpacesByCars[ocu][1] = "";
-        occupiedSpacesByCars[ocu][2] = "";
-        occupiedSpacesByCars[ocu][3] = "";
-        occupiedSpaces[ocu] = 0;
-        return occupiedSpaces[ocu];
+    public void setCarSpaces(int numOfSpaces){
+        this.freeSpacesC = numOfSpaces;
+        this.occupiedSpacesC = 0;
     }
 
-    public static void dataBase(String p, String m, String c, String ce, int casi){
-        occupiedSpacesByCars[casi][0] = p;
-        occupiedSpacesByCars[casi][1] = m;
-        occupiedSpacesByCars[casi][2] = c;
-        occupiedSpacesByCars[casi][3] = ce;
+    public void setMotorcycleSpaces(int numOfSpaces){
+        this.freeSpacesM = numOfSpaces;
+        this.occupiedSpacesM = 0;
     }
 
-    public static int searchCar(String p){
-        int alm = 0;
-        for(int i = 0; i<totalSpaces; i++){
-            String cont = occupiedSpacesByCars[i][0];
-            if(cont.equals(p)){
-                alm = i;
-                break;
-            }
-            else{
-                alm = -1;
-            }
-        }
-
-        return alm;
+    public int[] getCarSpaces(){
+        return this.carSpaces;
     }
 
-    public static String searchCedula(String ce){
-        String alm = "";
-        for(int i = 0; i<totalSpaces; i++){
-            String cont = occupiedSpacesByCars[i][3];
-            if(cont.equals(ce)){
-                alm = occupiedSpacesByCars[i][3];
-                break;
-            }
-            else{
-                alm = "No se ha encontrado la cedula";
-            }
-        }
-
-        return alm;
+    public int[] getMotorcycleSpaces(){
+        return this.motorcycleSpaces;
     }
 
-    public static int inputVerification(String p){
-        boolean letter = true;
-        boolean numbers = true;
-        int flag = 0;
-        char a;
+    public int getCarFreeSpaces(){
+        return this.freeSpacesC;
+    }
 
-        if(p.length() == 6){
-            flag = 1;
-        }
-        else {
-            flag = -1;
-        }
+    public int getCarOccupiedSpaces(){
+        return this.occupiedSpacesC;
+    }
 
-        if (flag == 1){
-            for (int i = 0; i < 3; i++){
-                a =  p.charAt(i);
-                if (letter == true){
-                    if (a >='A' && a<='Z'){
-                        letter = true;
-                        flag = 1;
-                    } 
-                    else {
-                        letter = false;
-                    }
-                } 
-                else {
-                    flag = -2;
-                }
-            }
-        }
+    public int getMotorcycleFreeSpaces(){
+        return this.freeSpacesM;
+    }
 
-        if (flag == 1){
-            for (int i = 3; i <= 5; i++){
-                a =  p.charAt(i);
-                if (numbers == true){
-                    if (a >='0' && a<='9'){
-                        numbers = true;
-                        flag = 1;
-                    } 
-                    else {
-                        numbers = false;
-                    }
-                } 
-                else
-                    flag = -3;
-            }
-        }
+    public int getMotorcycleOccupiedSpaces(){
+        return this.occupiedSpacesM;
+    }
 
-        return flag;
+    public void allocateSpace(int meansOfTransport, User user){
+        
     }
 }
