@@ -1,28 +1,5 @@
-public class Motorcycle {
-    private String plate, model;
-
-    public Motorcycle(){
-        this.model = "";
-        this.plate = "";
-    }
-
-    public void setPlate(String plate){
-        this.plate = plate.toUpperCase();
-    }
-
-    public void setModel(String model){
-        this.model = model;
-    }
-
-    public String getPlate(){
-        return this.plate;
-    }
-
-    public String getModel(){
-        return this.model;
-    }
-
-    public static boolean checkPlate(String plate){
+public class Motorcycle extends MeansOfTransport{
+    public boolean checkPlate(String plate){
         if(plate.length() > 6)
             return false;
 
@@ -46,9 +23,5 @@ public class Motorcycle {
         }
 
         return true;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(checkPlate("AWB19D"));
     }
 }

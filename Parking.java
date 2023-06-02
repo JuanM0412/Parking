@@ -57,7 +57,7 @@ public class Parking {
         return this.occupiedSpacesM;
     }
 
-    public void allocateSpace(int meansOfTransport, User user){
+    public void allocateSpace(MeansOfTransport typeOfTransport, User user){
         
     }
 }

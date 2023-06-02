@@ -1,28 +1,5 @@
-public class Car {
-    private String plate, model;
-
-    public Car(){
-        this.model = "";
-        this.plate = "";
-    }
-
-    public void setPlate(String plate){
-        this.plate = plate.toUpperCase();
-    }
-
-    public void setModel(String model){
-        this.model = model;
-    }
-
-    public String getPlate(){
-        return this.plate;
-    }
-
-    public String getModel(){
-        return this.model;
-    }
-
-    public static boolean checkPlate(String plate){
+public class Car extends MeansOfTransport{
+    public boolean checkPlate(String plate){
         if(plate.length() > 6)
             return false;
 

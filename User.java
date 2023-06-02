@@ -1,26 +1,38 @@
 public class User {
-    private String card;
-    private int meansOfTransport;
+    private String card, name;
+    private MeansOfTransport typeOfTransport;
 
     public User(){
         this.card = "";
-        this.meansOfTransport = 100;
+        this.typeOfTransport = new MeansOfTransport();
+        this.name = "";
     }
 
-    public void setMeansOfTransport(int transport){
-        this.meansOfTransport = transport;
+    public void setTypeOfTransport(int transport){
+        if(transport == 0)
+            this.typeOfTransport = new Motorcycle();
+        else if(transport == 1)
+            this.typeOfTransport = new Car();
     }
 
     public void setCard(String card){
         this.card = card;
     }
 
-    public int getMeansOfTransport(){
-        return this.meansOfTransport;
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public MeansOfTransport getMeansOfTransport(){
+        return this.typeOfTransport;
     }
 
     public String getCard(){
         return this.card;
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     public boolean checkCard(String card){
