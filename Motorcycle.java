@@ -1,6 +1,7 @@
-public class Motorcycle extends MeansOfTransport{
+class Motorcycle extends Vehicle{
+    @Override
     public boolean checkPlate(String plate){
-        if(plate.length() > 6)
+        if(plate.length() != 6)
             return false;
 
         String charPart = plate.substring(0, 2);

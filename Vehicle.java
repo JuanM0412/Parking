@@ -1,7 +1,7 @@
-public class MeansOfTransport {
+public abstract class Vehicle {
     private String plate, model;
 
-    public MeansOfTransport(){
+    public Vehicle(){
         this.plate = "";
         this.model = "";
     }
@@ -21,4 +21,6 @@ public class MeansOfTransport {
     public String getModel(){
         return this.model;
     }
+
+    public abstract boolean checkPlate(String plate);
 }

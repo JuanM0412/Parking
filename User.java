@@ -1,18 +1,17 @@
-public class User {
-    private String card, name;
-    private MeansOfTransport typeOfTransport;
+class User {
+    private String card, name, typeOfTransport;
 
     public User(){
         this.card = "";
-        this.typeOfTransport = new MeansOfTransport();
+        this.typeOfTransport = "";
         this.name = "";
     }
 
     public void setTypeOfTransport(int transport){
         if(transport == 0)
-            this.typeOfTransport = new Motorcycle();
+            this.typeOfTransport = "Motorcycle";
         else if(transport == 1)
-            this.typeOfTransport = new Car();
+            this.typeOfTransport = "Car";
     }
 
     public void setCard(String card){
@@ -23,7 +22,7 @@ public class User {
         this.name = name;
     }
 
-    public MeansOfTransport getMeansOfTransport(){
+    public String getVehicle(){
         return this.typeOfTransport;
     }
 
@@ -36,14 +35,14 @@ public class User {
     }
 
     public boolean checkCard(String card){
+        if(card.length() < 7)
+            return false;
+        
         for(char digit: card.toCharArray()){
-            if(!(digit >= '0' && digit <= 9)){
+            if(!(digit >= '0' && digit <= '9')){
                 return false;
             }
         }
-
-        if(card.length() < 8)
-            return false;
 
         return true;
     }
