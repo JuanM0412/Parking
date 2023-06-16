@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Parking {
     private int freeSpacesC, occupiedSpacesC, freeSpacesM, occupiedSpacesM;
     private int carSpaces[], motorcycleSpaces[];
@@ -57,7 +59,17 @@ public class Parking {
         return this.occupiedSpacesM;
     }
 
-    public void allocateSpace(Vehicle typeOfTransport, User user){
-        
+    public void allocateSpace(Vehicle typeOfTransport, User usr, int meanOfTransport){
+        int space;
+        if(meanOfTransport == 0){
+            space = (int)(Math.random() * freeSpacesC);
+            freeSpacesM--;
+            occupiedSpacesM++;
+        }
+        else{
+            space = (int)(Math.random() * freeSpacesM);
+            freeSpacesC--;
+            occupiedSpacesC++;
+        }
     }
 }
