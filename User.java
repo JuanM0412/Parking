@@ -1,5 +1,6 @@
 class User {
     private String card, name, typeOfTransport;
+    private int assignedSpace;
 
     public User(){
         this.card = "";
@@ -22,6 +23,10 @@ class User {
         this.name = name;
     }
 
+    public void setAssignedSpace(int space){
+        this.assignedSpace = space;
+    }
+
     public String getVehicle(){
         return this.typeOfTransport;
     }
@@ -32,6 +37,10 @@ class User {
 
     public String getName(){
         return this.name;
+    }
+
+    public int getAssignedSpace(){
+        return this.assignedSpace;
     }
 
     public boolean checkCard(String card){
