@@ -14,6 +14,8 @@ class Parking {
     public void setParking(int car, int mot){
         this.carSpaces = new int[car];
         this.motorcycleSpaces = new int[mot];
+        this.freeSpacesC = car;
+        this.freeSpacesM = mot;
         for(int i = 0; i < car; i++){
             carSpaces[i] = 0;
         }
@@ -58,25 +60,32 @@ class Parking {
     }
 
     public int allocateSpace(int meanOfTransport){
-        int space = 0;
+        int space = -1;
         if(meanOfTransport == 0){
-            for(int n: motorcycleSpaces){
-                if(n == 0)
-                    space = n;
+            for(int i = 0; i < motorcycleSpaces.length; i++){
+                if(motorcycleSpaces[i] == 0)
+                    space = motorcycleSpaces[i];
             }
-            motorcycleSpaces[space] = 1;
-            freeSpacesM--;
-            occupiedSpacesM++;
+            if(space != -1){
+                motorcycleSpaces[space] = 1;
+                freeSpacesM--;
+                occupiedSpacesM++;
+            }
         }
         else{
-            for(int n: carSpaces){
-                if(n == 0)
-                    space = n;
+            for(int i = 0; i < carSpaces.length; i++){
+                if(carSpaces[i] == 0)
+                    space = carSpaces[i];
             }
-            carSpaces[space] = 1;
-            freeSpacesC--;
-            occupiedSpacesC++;
+            if(space != -1){
+                carSpaces[space] = 1;
+                freeSpacesC--;
+                occupiedSpacesC++;
+            }
         }
+
+        if(space == -1)
+            return -1;
 
         return space;
     }
