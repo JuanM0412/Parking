@@ -36,13 +36,13 @@ public class Main {
                 transport = new Motorcycle();
                 usr.setTypeOfTransport(typeOfTransport);
                 System.out.println("Enter the plate of your motorcycle: ");
-                plate = in.nextLine();
+                plate = in.nextLine().toUpperCase();
             }
             else{
                 transport = new Car();
                 usr.setTypeOfTransport(typeOfTransport);
                 System.out.println("Enter the plate of your car: ");
-                plate = in.nextLine();
+                plate = in.nextLine().toUpperCase();
             }
 
             flag = transport.checkPlate(plate);

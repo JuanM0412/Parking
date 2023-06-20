@@ -63,24 +63,24 @@ class Parking {
         int space = -1;
         if(meanOfTransport == 0){
             for(int i = 0; i < motorcycleSpaces.length; i++){
-                if(motorcycleSpaces[i] == 0)
-                    space = motorcycleSpaces[i];
-            }
-            if(space != -1){
-                motorcycleSpaces[space] = 1;
-                freeSpacesM--;
-                occupiedSpacesM++;
+                if(motorcycleSpaces[i] == 0){
+                    space = i;
+                    motorcycleSpaces[i] = 1;
+                    freeSpacesM--;
+                    occupiedSpacesM++;
+                    break;
+                }
             }
         }
         else{
             for(int i = 0; i < carSpaces.length; i++){
-                if(carSpaces[i] == 0)
-                    space = carSpaces[i];
-            }
-            if(space != -1){
-                carSpaces[space] = 1;
-                freeSpacesC--;
-                occupiedSpacesC++;
+                if(carSpaces[i] == 0){
+                    space = i;
+                    carSpaces[i] = 1;
+                    freeSpacesC--;
+                    occupiedSpacesC++;
+                    break;
+                }
             }
         }
 
