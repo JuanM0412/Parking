@@ -1,27 +1,27 @@
 class Parking {
     private int freeSpacesC, occupiedSpacesC, freeSpacesM, occupiedSpacesM;
-    private int carSpaces[], motorcycleSpaces[];
+    private User carSpaces[], motorcycleSpaces[];
 
     public Parking(){
         this.freeSpacesC = 0;
         this.occupiedSpacesC = 0;
         this.freeSpacesM = 0;
         this.occupiedSpacesM = 0;
-        this.motorcycleSpaces = new int[0]; 
-        this.carSpaces = new int[0]; 
+        this.motorcycleSpaces = new User[0]; 
+        this.carSpaces = new User[0]; 
     }
 
     public void setParking(int car, int mot){
-        this.carSpaces = new int[car];
-        this.motorcycleSpaces = new int[mot];
+        this.carSpaces = new User[car];
+        this.motorcycleSpaces = new User[mot];
         this.freeSpacesC = car;
         this.freeSpacesM = mot;
         for(int i = 0; i < car; i++){
-            carSpaces[i] = 0;
+            carSpaces[i] = null;
         }
 
         for(int i = 0; i < mot; i++){
-            motorcycleSpaces[i] = 0;
+            motorcycleSpaces[i] = null;
         }
     }
 
@@ -35,11 +35,11 @@ class Parking {
         this.occupiedSpacesM = 0;
     }
 
-    public int[] getCarSpaces(){
+    public User[] getCarSpaces(){
         return this.carSpaces;
     }
 
-    public int[] getMotorcycleSpaces(){
+    public User[] getMotorcycleSpaces(){
         return this.motorcycleSpaces;
     }
 
@@ -59,13 +59,13 @@ class Parking {
         return this.occupiedSpacesM;
     }
 
-    public int allocateSpace(int meanOfTransport){
+    public int allocateSpace(int meanOfTransport, User usr){
         int space = -1;
         if(meanOfTransport == 0){
             for(int i = 0; i < motorcycleSpaces.length; i++){
-                if(motorcycleSpaces[i] == 0){
+                if(motorcycleSpaces[i] == null){
                     space = i;
-                    motorcycleSpaces[i] = 1;
+                    motorcycleSpaces[i] = usr;
                     freeSpacesM--;
                     occupiedSpacesM++;
                     break;
@@ -74,9 +74,9 @@ class Parking {
         }
         else{
             for(int i = 0; i < carSpaces.length; i++){
-                if(carSpaces[i] == 0){
+                if(carSpaces[i] == null){
                     space = i;
-                    carSpaces[i] = 1;
+                    carSpaces[i] = usr;
                     freeSpacesC--;
                     occupiedSpacesC++;
                     break;
@@ -88,5 +88,41 @@ class Parking {
             return -1;
 
         return space;
+    }
+
+    public void showParking(){
+        for(int i = 0; i < carSpaces.length; i++){
+            System.out.print(String.format("%-3s ", "C" + i));
+        }
+
+        System.out.println();
+
+        for(int i = 0; i < motorcycleSpaces.length; i++){
+            System.out.print(String.format("%-3s ", "M" + i));;
+        }
+
+        System.out.println();
+    }
+
+    public void parkingInfo(String selectedParking){
+        int num = Character.getNumericValue(selectedParking.toCharArray()[1]);
+        char vehicle = selectedParking.toCharArray()[0];
+        User usr;
+
+        if(vehicle == 'M'){
+            usr = motorcycleSpaces[num];
+        }
+        else{
+            usr = carSpaces[num];
+        }
+
+        Vehicle transport = usr.getVehicle();
+        System.out.println("This parking is occupied by:");
+        System.out.println("Type of vehicle: " + usr.getTypeOfTransport());
+        System.out.println("Plate: " + transport.getPlate());
+        System.out.println("Model: " + transport.getModel());
+        System.out.println("The owner of this vehicle is:");
+        System.out.println("Card: " + usr.getCard());
+        System.out.println("Name: " + usr.getName());
     }
 }

@@ -1,18 +1,24 @@
 class User {
     private String card, name, typeOfTransport;
     private int assignedSpace;
+    private Vehicle vehicle;
 
     public User(){
         this.card = "";
         this.typeOfTransport = "";
         this.name = "";
+        this.vehicle = null;
     }
 
     public void setTypeOfTransport(int transport){
-        if(transport == 0)
+        if(transport == 0){
             this.typeOfTransport = "Motorcycle";
-        else if(transport == 1)
+            this.vehicle = new Motorcycle();
+        }
+        else if(transport == 1){
             this.typeOfTransport = "Car";
+            this.vehicle = new Car();
+        }
     }
 
     public void setCard(String card){
@@ -27,8 +33,12 @@ class User {
         this.assignedSpace = space;
     }
 
-    public String getVehicle(){
+    public String getTypeOfTransport(){
         return this.typeOfTransport;
+    }
+
+    public Vehicle getVehicle(){
+        return this.vehicle;
     }
 
     public String getCard(){

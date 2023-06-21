@@ -8,7 +8,7 @@ public class Main {
         int typeOfTransport, space;
         boolean flag;
         char op = 'Y';
-        String plate, card, model, name;
+        String plate, card, model, name, selectedParking;
         User usr = new User();
         Vehicle transport = null;
 
@@ -58,7 +58,7 @@ public class Main {
 
             transport.setModel(model);
             System.out.println("This is the information of your vehicle.");
-            System.out.println("Type of vehicle: " + usr.getVehicle());
+            System.out.println("Type of vehicle: " + usr.getTypeOfTransport());
             System.out.println("Plate: " + transport.getPlate());
             System.out.println("Model: " + transport.getModel());
             System.out.println("Your information.");
@@ -69,7 +69,7 @@ public class Main {
             op = in.next().charAt(0);
             do{
                 if(op == 'Y' || op == 'y'){
-                    space = parking.allocateSpace(typeOfTransport);
+                    space = parking.allocateSpace(typeOfTransport, usr);
                     usr.setAssignedSpace(space);
                     System.out.println("The assigned parking space is " + usr.getAssignedSpace());
                     flag = false;
@@ -97,6 +97,10 @@ public class Main {
             System.out.println("Free spaces for motorcycle: " + parking.getMotorcycleFreeSpaces());
             System.out.println("Ocupied car spaces: " + parking.getCarOccupiedSpaces());
             System.out.println("Ocupied motorcycle spaces: " + parking.getMotorcycleOccupiedSpaces());
+            parking.showParking();
+            System.out.println("Select one of the spaces to view the information: ");
+            selectedParking = in.next();
+            parking.parkingInfo(selectedParking);
         } while(true);
     }
 }
