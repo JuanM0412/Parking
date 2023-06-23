@@ -9,12 +9,12 @@ public class Main {
         boolean flag;
         char op = 'Y';
         String plate, card, model, name, selectedParking;
-        User usr = new User();
         Vehicle transport = null;
 
         parking.setParking(10, 10);
 
         do{
+            User usr = new User();
             System.out.println("Please enter your card: ");
             card = in.nextLine();
             flag = usr.checkCard(card);
@@ -34,13 +34,13 @@ public class Main {
             in.nextLine();
             if(typeOfTransport == 0){
                 transport = new Motorcycle();
-                usr.setTypeOfTransport(typeOfTransport);
+                usr.setTypeOfTransport(typeOfTransport, transport);
                 System.out.println("Enter the plate of your motorcycle: ");
                 plate = in.nextLine().toUpperCase();
             }
             else{
                 transport = new Car();
-                usr.setTypeOfTransport(typeOfTransport);
+                usr.setTypeOfTransport(typeOfTransport, transport);
                 System.out.println("Enter the plate of your car: ");
                 plate = in.nextLine().toUpperCase();
             }
@@ -80,7 +80,8 @@ public class Main {
                         System.out.println("1. Type of vehicle. \n2. Plate. \n3. Model. \n4. Card. \n5. Name.");
                         System.out.println("Choose one: ");
                         in.next().charAt(0);
-                    } catch(InputMismatchException e){
+                    } 
+                    catch(InputMismatchException e){
                         System.out.println("Choose a valid option: ");
                         in.next().charAt(0);
                         flag = false;
@@ -97,9 +98,10 @@ public class Main {
             System.out.println("Free spaces for motorcycle: " + parking.getMotorcycleFreeSpaces());
             System.out.println("Ocupied car spaces: " + parking.getCarOccupiedSpaces());
             System.out.println("Ocupied motorcycle spaces: " + parking.getMotorcycleOccupiedSpaces());
+
             parking.showParking();
             System.out.println("Select one of the spaces to view the information: ");
-            selectedParking = in.next();
+            selectedParking = in.next().toUpperCase();
             parking.parkingInfo(selectedParking);
         } while(true);
     }

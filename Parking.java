@@ -105,24 +105,25 @@ class Parking {
     }
 
     public void parkingInfo(String selectedParking){
-        int num = Character.getNumericValue(selectedParking.toCharArray()[1]);
-        char vehicle = selectedParking.toCharArray()[0];
-        User usr;
+        char[] selected = selectedParking.toCharArray();
+        int num = Character.getNumericValue(selected[1]);
+        char vehicle = selected[0];
+        User tmpUsr;
 
         if(vehicle == 'M'){
-            usr = motorcycleSpaces[num];
+            tmpUsr = motorcycleSpaces[num];
         }
         else{
-            usr = carSpaces[num];
+            tmpUsr = carSpaces[num];
         }
 
-        Vehicle transport = usr.getVehicle();
+        Vehicle tmpVehicle = tmpUsr.getVehicle();
         System.out.println("This parking is occupied by:");
-        System.out.println("Type of vehicle: " + usr.getTypeOfTransport());
-        System.out.println("Plate: " + transport.getPlate());
-        System.out.println("Model: " + transport.getModel());
+        System.out.println("Type of vehicle: " + tmpUsr.getTypeOfTransport());
+        System.out.println("Plate: " + tmpVehicle.getPlate());
+        System.out.println("Model: " + tmpVehicle.getModel());
         System.out.println("The owner of this vehicle is:");
-        System.out.println("Card: " + usr.getCard());
-        System.out.println("Name: " + usr.getName());
+        System.out.println("Card: " + tmpUsr.getCard());
+        System.out.println("Name: " + tmpUsr.getName());
     }
 }

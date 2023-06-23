@@ -10,15 +10,15 @@ class User {
         this.vehicle = null;
     }
 
-    public void setTypeOfTransport(int transport){
+    public void setTypeOfTransport(int transport, Vehicle vehicle){
         if(transport == 0){
             this.typeOfTransport = "Motorcycle";
-            this.vehicle = new Motorcycle();
         }
         else if(transport == 1){
             this.typeOfTransport = "Car";
-            this.vehicle = new Car();
         }
+        
+        this.vehicle = vehicle;
     }
 
     public void setCard(String card){
