@@ -9,7 +9,7 @@ public class Main {
         boolean flag;
         char op = 'Y';
         String plate, card, model, name, selectedParking;
-        Vehicle transport = null;
+        Vehicle vehicle = null;
 
         parking.setParking(10, 10);
 
@@ -33,34 +33,34 @@ public class Main {
             typeOfTransport = in.nextInt();
             in.nextLine();
             if(typeOfTransport == 0){
-                transport = new Motorcycle();
-                usr.setTypeOfTransport(typeOfTransport, transport);
+                vehicle = new Motorcycle();
+                usr.setTypeOfTransport(typeOfTransport, vehicle);
                 System.out.println("Enter the plate of your motorcycle: ");
                 plate = in.nextLine().toUpperCase();
             }
             else{
-                transport = new Car();
-                usr.setTypeOfTransport(typeOfTransport, transport);
+                vehicle = new Car();
+                usr.setTypeOfTransport(typeOfTransport, vehicle);
                 System.out.println("Enter the plate of your car: ");
                 plate = in.nextLine().toUpperCase();
             }
 
-            flag = transport.checkPlate(plate);
+            flag = vehicle.checkPlate(plate);
             while(flag == false){
                 System.out.println("Please, enter a valid plate: ");
                 plate = in.nextLine();
-                flag = transport.checkPlate(plate);
+                flag = vehicle.checkPlate(plate);
             }
                 
-            transport.setPlate(plate.toUpperCase());
+            vehicle.setPlate(plate.toUpperCase());
             System.out.println("Enter the model of your vehicle: ");
             model = in.nextLine();
 
-            transport.setModel(model);
+            vehicle.setModel(model);
             System.out.println("This is the information of your vehicle.");
             System.out.println("Type of vehicle: " + usr.getTypeOfTransport());
-            System.out.println("Plate: " + transport.getPlate());
-            System.out.println("Model: " + transport.getModel());
+            System.out.println("Plate: " + vehicle.getPlate());
+            System.out.println("Model: " + vehicle.getModel());
             System.out.println("Your information.");
             System.out.println("Card: " + usr.getCard());
             System.out.println("Name: " + usr.getName());
