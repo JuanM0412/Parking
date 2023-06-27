@@ -69,4 +69,18 @@ public class Admin {
             parkingInfo(parking);
         }
     }
+
+    public void setAdmin(Scanner in, Parking parking, Admin admin){
+        String username, password;
+
+        System.out.println("Hello, Admin!");
+        System.out.println("Please, enter a username: ");
+        username = in.next();
+
+        admin.setUsername(username);
+        System.out.println("Please, enter a password: ");
+        password = in.next();
+
+        admin.setPassword(password);
+    }
 }

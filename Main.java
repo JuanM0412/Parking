@@ -6,65 +6,24 @@ public class Main {
         Parking parking = new Parking();
         Scanner in = new Scanner(System.in);
         int typeOfTransport, space;
-        boolean flag;
+        boolean flag = true;
         char op = 'Y';
-        String plate, card, model, name, selectedParking;
+        String selectedParking;
         Vehicle vehicle = null;
+        Admin admin = new Admin();
 
-        parking.setParking(10, 10);
+        admin.setAdmin(in, parking, admin);
+        admin.setParking(in);
+        parking = admin.getParking();
 
         do{
             User usr = new User();
-            System.out.println("Please enter your card: ");
-            card = in.nextLine();
-            flag = usr.checkCard(card);
-            while(flag == false){
-                System.out.println("Please enter a valid card: ");
-                card = in.nextLine();
-                flag = usr.checkCard(card);
-            }
-                
-            usr.setCard(card);
-            System.out.println("Please enter your name: ");
-            name = in.nextLine();
-            usr.setName(name);
+            usr.setUser(usr, in, vehicle);
+            vehicle = usr.getVehicle();
 
-            System.out.println("Enter a valid mean of transport (0/1): ");
-            typeOfTransport = in.nextInt();
-            in.nextLine();
-            if(typeOfTransport == 0){
-                vehicle = new Motorcycle();
-                usr.setTypeOfTransport(typeOfTransport, vehicle);
-                System.out.println("Enter the plate of your motorcycle: ");
-                plate = in.nextLine().toUpperCase();
-            }
-            else{
-                vehicle = new Car();
-                usr.setTypeOfTransport(typeOfTransport, vehicle);
-                System.out.println("Enter the plate of your car: ");
-                plate = in.nextLine().toUpperCase();
-            }
+            usr.userInfo(usr, vehicle);
 
-            flag = vehicle.checkPlate(plate);
-            while(flag == false){
-                System.out.println("Please, enter a valid plate: ");
-                plate = in.nextLine();
-                flag = vehicle.checkPlate(plate);
-            }
-                
-            vehicle.setPlate(plate.toUpperCase());
-            System.out.println("Enter the model of your vehicle: ");
-            model = in.nextLine();
-
-            vehicle.setModel(model);
-            System.out.println("This is the information of your vehicle.");
-            System.out.println("Type of vehicle: " + usr.getTypeOfTransport());
-            System.out.println("Plate: " + vehicle.getPlate());
-            System.out.println("Model: " + vehicle.getModel());
-            System.out.println("Your information.");
-            System.out.println("Card: " + usr.getCard());
-            System.out.println("Name: " + usr.getName());
-
+            typeOfTransport = usr.getTypeOfTransport();
             System.out.println("Is your information right? (Y/n): ");
             op = in.next().charAt(0);
             do{
@@ -93,13 +52,9 @@ public class Main {
                 }
             } while(flag);
 
-            System.out.println("This is the information of the parking.");
-            System.out.println("Free spaces for car: " + parking.getCarFreeSpaces());
-            System.out.println("Free spaces for motorcycle: " + parking.getMotorcycleFreeSpaces());
-            System.out.println("Ocupied car spaces: " + parking.getCarOccupiedSpaces());
-            System.out.println("Ocupied motorcycle spaces: " + parking.getMotorcycleOccupiedSpaces());
-
+            admin.parkingInfo(parking);
             parking.showParking();
+            
             System.out.println("Select one of the spaces to view the information: ");
             selectedParking = in.next().toUpperCase();
             parking.parkingInfo(selectedParking);

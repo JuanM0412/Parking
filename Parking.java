@@ -105,25 +105,33 @@ class Parking {
     }
 
     public void parkingInfo(String selectedParking){
-        char[] selected = selectedParking.toCharArray();
-        int num = Character.getNumericValue(selected[1]);
-        char vehicle = selected[0];
-        User tmpUsr;
+        try{
+            char[] selected = selectedParking.toCharArray();
+            int num = Character.getNumericValue(selected[1]);
+            char vehicle = selected[0];
+            User tmpUsr;
 
-        if(vehicle == 'M'){
-            tmpUsr = motorcycleSpaces[num];
-        }
-        else{
-            tmpUsr = carSpaces[num];
-        }
+            if(vehicle == 'M'){
+                tmpUsr = motorcycleSpaces[num];
+            }
+            else{
+                tmpUsr = carSpaces[num];
+            }
 
-        Vehicle tmpVehicle = tmpUsr.getVehicle();
-        System.out.println("This parking is occupied by:");
-        System.out.println("Type of vehicle: " + tmpUsr.getTypeOfTransport());
-        System.out.println("Plate: " + tmpVehicle.getPlate());
-        System.out.println("Model: " + tmpVehicle.getModel());
-        System.out.println("The owner of this vehicle is:");
-        System.out.println("Card: " + tmpUsr.getCard());
-        System.out.println("Name: " + tmpUsr.getName());
+            String transport = (tmpUsr.getTypeOfTransport() == 1) ? "Car" : "Motorcycle";
+            Vehicle tmpVehicle = tmpUsr.getVehicle();
+            
+            System.out.println("This parking is occupied by:");
+            System.out.println("Name: " + tmpUsr.getName());
+            System.out.println("Card: " + tmpUsr.getCard());
+            
+            System.out.println("With the following vehicle:");
+            System.out.println("Type of vehicle: " + transport);
+            System.out.println("Plate: " + tmpVehicle.getPlate());
+            System.out.println("Model: " + tmpVehicle.getModel());
+        }
+        catch(Exception e){
+            System.out.println("Parking space " + selectedParking + " is free.");
+        }
     }
 }

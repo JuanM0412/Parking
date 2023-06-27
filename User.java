@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class User {
     private String card, name, typeOfTransport;
     private int assignedSpace;
@@ -21,6 +23,10 @@ class User {
         this.vehicle = vehicle;
     }
 
+    public void setVehicle(Vehicle vehicle){
+        this.vehicle = vehicle;
+    }
+
     public void setCard(String card){
         this.card = card;
     }
@@ -33,8 +39,11 @@ class User {
         this.assignedSpace = space;
     }
 
-    public String getTypeOfTransport(){
-        return this.typeOfTransport;
+    public int getTypeOfTransport(){
+        if(typeOfTransport == "Car")
+            return 1;
+        
+        return 0;
     }
 
     public Vehicle getVehicle(){
@@ -64,5 +73,65 @@ class User {
         }
 
         return true;
+    }
+
+    public void setUser(User usr, Scanner in, Vehicle vehicle){
+        boolean flag;
+        int typeOfTransport;
+        String plate, card, model, name;
+
+        in.nextLine();
+        System.out.println("Please enter your card: ");
+        card = in.nextLine();
+        flag = usr.checkCard(card);
+        while(flag == false){
+            System.out.println("Please enter a valid card: ");
+            card = in.nextLine();
+            flag = usr.checkCard(card);
+        }
+                
+        usr.setCard(card);
+        System.out.println("Please enter your name: ");
+        name = in.nextLine();
+        usr.setName(name);
+
+        System.out.println("Enter a valid mean of transport (0/1): ");
+        typeOfTransport = in.nextInt();
+        in.nextLine();
+        if(typeOfTransport == 0){
+            vehicle = new Motorcycle();
+            usr.setTypeOfTransport(typeOfTransport, vehicle);
+            System.out.println("Enter the plate of your motorcycle: ");
+            plate = in.nextLine().toUpperCase();
+        }
+        else{
+            vehicle = new Car();
+            usr.setTypeOfTransport(typeOfTransport, vehicle);
+            System.out.println("Enter the plate of your car: ");
+            plate = in.nextLine().toUpperCase();
+        }
+
+        flag = vehicle.checkPlate(plate);
+        while(flag == false){
+            System.out.println("Please, enter a valid plate: ");
+            plate = in.nextLine();
+            flag = vehicle.checkPlate(plate);
+        }
+                
+        vehicle.setPlate(plate.toUpperCase());
+        System.out.println("Enter the model of your vehicle: ");
+        model = in.nextLine();
+
+        vehicle.setModel(model);
+    }
+
+    public void userInfo(User usr, Vehicle vehicle){
+        System.out.println("This is the information of your vehicle.");
+        System.out.println("Type of vehicle: " + usr.getTypeOfTransport());
+        System.out.println("Plate: " + vehicle.getPlate());
+        System.out.println("Model: " + vehicle.getModel());
+        System.out.println("Your information.");
+        System.out.println("Card: " + usr.getCard());
+        System.out.println("Name: " + usr.getName());
     }
 }
