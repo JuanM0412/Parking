@@ -30,7 +30,7 @@ public class Admin {
         motorcycle = in.nextInt();
         parking.setParking(car, motorcycle);
 
-        parkingInfo(parking);
+        parkingInfo(parking, in);
     }
 
     public String getPassword(){
@@ -45,7 +45,7 @@ public class Admin {
         return this.parking;
     }
 
-    public void parkingInfo(Parking parking){
+    public void parkingInfo(Parking parking, Scanner in){
         System.out.println("This is the information of the parking.");
         System.out.println("Free spaces for car: " + parking.getCarFreeSpaces());
         System.out.println("Free spaces for motorcycle: " + parking.getMotorcycleFreeSpaces());
@@ -66,7 +66,7 @@ public class Admin {
             setParking(in);
         }
         else if(op == 2){
-            parkingInfo(parking);
+            parkingInfo(parking, in);
         }
     }
 

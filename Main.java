@@ -12,11 +12,16 @@ public class Main {
         Vehicle vehicle = null;
         Admin admin = new Admin();
 
+        cleanScreen();
         admin.setAdmin(in, parking, admin);
         admin.setParking(in);
+
         parking = admin.getParking();
+        System.out.println("Please enter a word to continue.");
+        in.next();
 
         do{
+            cleanScreen();
             User usr = new User();
             usr.setUser(usr, in, vehicle);
             vehicle = usr.getVehicle();
@@ -38,26 +43,50 @@ public class Main {
                         System.out.println("Which of the following do you want to replace?: ");
                         System.out.println("1. Type of vehicle. \n2. Plate. \n3. Model. \n4. Card. \n5. Name.");
                         System.out.println("Choose one: ");
-                        in.next().charAt(0);
+
+                        op = in.next().charAt(0);
+                        vehicle = processOption(in, op, usr, vehicle);
+                        usr.userInfo(usr, vehicle);
+
+                        System.out.println("Is your information right? (Y/n): ");
+                        op = in.next().charAt(0);
                     } 
                     catch(InputMismatchException e){
                         System.out.println("Choose a valid option: ");
                         in.next().charAt(0);
-                        flag = false;
                     }
                 }
                 else{
                     System.out.println("Invalid option.");
-                    flag = false;
                 }
             } while(flag);
 
-            admin.parkingInfo(parking);
+            System.out.println("Please enter a word to continue.");
+            in.next();
+            cleanScreen();
+
+            admin.parkingInfo(parking, in);
             parking.showParking();
-            
+
             System.out.println("Select one of the spaces to view the information: ");
             selectedParking = in.next().toUpperCase();
             parking.parkingInfo(selectedParking);
+
+            System.out.println("Please enter a word to continue.");
+            in.next();
         } while(true);
+    }
+
+    public static Vehicle processOption(Scanner in, char op, User usr, Vehicle vehicle){
+        if(op == '1'){
+            vehicle = usr.setVehicle(in, vehicle, usr);
+        }
+
+        return vehicle;
+    }
+
+    public static void cleanScreen(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

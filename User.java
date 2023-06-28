@@ -77,8 +77,7 @@ class User {
 
     public void setUser(User usr, Scanner in, Vehicle vehicle){
         boolean flag;
-        int typeOfTransport;
-        String plate, card, model, name;
+        String card, name;
 
         in.nextLine();
         System.out.println("Please enter your card: ");
@@ -94,6 +93,14 @@ class User {
         System.out.println("Please enter your name: ");
         name = in.nextLine();
         usr.setName(name);
+
+        vehicle = setVehicle(in, vehicle, usr);
+    }
+
+    public Vehicle setVehicle(Scanner in, Vehicle vehicle, User usr){
+        boolean flag;
+        int typeOfTransport;
+        String plate, model;
 
         System.out.println("Enter a valid mean of transport (0/1): ");
         typeOfTransport = in.nextInt();
@@ -123,6 +130,8 @@ class User {
         model = in.nextLine();
 
         vehicle.setModel(model);
+
+        return vehicle;
     }
 
     public void userInfo(User usr, Vehicle vehicle){
