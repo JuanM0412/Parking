@@ -21,11 +21,12 @@ public class Main {
         in.next();
 
         do{
+            menu(in);
             cleanScreen();
             User usr = new User();
+            
             usr.setUser(usr, in, vehicle);
             vehicle = usr.getVehicle();
-
             usr.userInfo(usr, vehicle);
 
             typeOfTransport = usr.getTypeOfTransport();
@@ -81,6 +82,21 @@ public class Main {
         if(op == '1'){
             vehicle = usr.setVehicle(in, vehicle, usr);
         }
+        else if(op == '2'){
+            int typeOfTransport = usr.getTypeOfTransport();
+            String plate;
+
+            if(typeOfTransport == 0){
+                System.out.println("Enter the plate of your motorcycle: ");
+                plate = in.next().toUpperCase();
+            }
+            else{
+                System.out.println("Enter the plate of your car: ");
+                plate = in.next().toUpperCase();
+            }
+
+            vehicle.setPlate(plate);
+        }
 
         return vehicle;
     }
@@ -88,5 +104,17 @@ public class Main {
     public static void cleanScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void menu(Scanner in){
+        int usrType = 2;
+
+        System.out.println("Please enter your user type [1/2]: \n1. Admin. \n2. Client.");
+        usrType = in.nextInt();
+        
+        if(usrType != 1 && usrType != 2){
+            System.out.println("You have choose an invalid option, so by default you are going to enter on client mode.");
+            usrType = 2;
+        }
     }
 }
