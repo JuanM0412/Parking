@@ -12,7 +12,7 @@ class Car extends Vehicle{
                 return false;
             }
         }
-        
+
         for(char n: numericPart.toCharArray()){
             if(!(n >= '0' && n <= '9')){
                 return false;

@@ -5,11 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Parking parking = new Parking();
         Scanner in = new Scanner(System.in);
-        int typeOfTransport, space;
-        boolean flag = true;
-        char op = 'Y';
         String selectedParking;
-        Vehicle vehicle = null;
         Admin admin = new Admin();
 
         cleanScreen();
@@ -55,6 +51,39 @@ public class Main {
 
             vehicle.setPlate(plate);
         }
+        else if(op == '3'){
+            String model;
+
+            in.nextLine();
+            System.out.println("Enter the model of your vehicle: ");
+            model = in.nextLine();
+            vehicle.setModel(model);
+        }
+        else if(op == '4'){
+            boolean flag;
+            String card;
+
+            in.nextLine();
+            System.out.println("Please enter your card: ");
+            card = in.nextLine();
+            flag = usr.checkCard(card);
+
+            while(flag == false){
+                System.out.println("Please enter a valid card: ");
+                card = in.nextLine();
+                flag = usr.checkCard(card);
+            }
+
+            usr.setCard(card);
+        }
+        else if(op == '5'){
+            String name;
+
+            in.nextLine();
+            System.out.println("Please enter your name: ");
+            name = in.nextLine();
+            usr.setName(name);
+        }
 
         return vehicle;
     }
@@ -78,12 +107,14 @@ public class Main {
         System.out.println("Please enter a word to continue.");
         in.next();
         cleanScreen();
+
         if(usrType == 2)
             customerMenu(in, parking);
     }
 
     public static void customerMenu(Scanner in, Parking parking){
         int option = 1;
+        User usr = new User();
 
         System.out.println("Welcome, dear customer! Please, type an option to start.");
         System.out.println("1. Use the parking.\n2. View my information. \n3. Leave the parking.");
@@ -94,29 +125,29 @@ public class Main {
             option = 1;
         }
 
+        cleanScreen();
         if(option == 1)
-            useParking(in, parking);
+            useParking(in, parking, usr);
         else if(option == 2)
-            userInfo(in);
+            userInfo(usr);
         else
-            leaveParking(in);
+            leaveParking();
     }
 
-    public static void useParking(Scanner in, Parking parking){
+    public static void useParking(Scanner in, Parking parking, User usr){
         int typeOfTransport, space;
         boolean flag = true;
         char op = 'Y';
         Vehicle vehicle = null;
-        User usr = new User();
             
         usr.setUser(usr, in, vehicle);
         vehicle = usr.getVehicle();
         usr.userInfo(usr, vehicle);
 
-        typeOfTransport = usr.getTypeOfTransport();
         System.out.println("Is your information right? (Y/n): ");
         op = in.next().charAt(0);
         do{
+            typeOfTransport = usr.getTypeOfTransport();
             if(op == 'Y' || op == 'y'){
                 space = parking.allocateSpace(typeOfTransport, usr);
                 usr.setAssignedSpace(space);
@@ -151,11 +182,12 @@ public class Main {
         cleanScreen();
     }
 
-    public static void userInfo(Scanner in){
-
+    public static void userInfo(User usr){
+        Vehicle vehicle = usr.getVehicle();
+        usr.userInfo(usr, vehicle);
     }
 
-    public static void leaveParking(Scanner in){
-
+    public static void leaveParking(){
+        System.out.println("Thanks for using the parking!");
     }
 }

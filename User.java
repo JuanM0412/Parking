@@ -10,6 +10,7 @@ class User {
         this.typeOfTransport = "";
         this.name = "";
         this.vehicle = null;
+        this.assignedSpace = -1;
     }
 
     public void setTypeOfTransport(int transport, Vehicle vehicle){
@@ -83,6 +84,7 @@ class User {
         System.out.println("Please enter your card: ");
         card = in.nextLine();
         flag = usr.checkCard(card);
+        
         while(flag == false){
             System.out.println("Please enter a valid card: ");
             card = in.nextLine();
