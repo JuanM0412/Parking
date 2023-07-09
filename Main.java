@@ -5,7 +5,6 @@ public class Main {
     public static void main(String[] args) {
         Parking parking = new Parking();
         Scanner in = new Scanner(System.in);
-        String selectedParking;
         Admin admin = new Admin();
 
         cleanScreen();
@@ -18,17 +17,7 @@ public class Main {
 
         do{
             cleanScreen();
-            menu(in, parking);
-
-            admin.parkingInfo(parking, in);
-            parking.showParking();
-
-            System.out.println("Select one of the spaces to view the information: ");
-            selectedParking = in.next().toUpperCase();
-            parking.parkingInfo(selectedParking);
-
-            System.out.println("Please enter a word to continue.");
-            in.next();
+            menu(in, parking, admin);
         } while(true);
     }
 
@@ -93,7 +82,7 @@ public class Main {
         System.out.flush();
     }
 
-    public static void menu(Scanner in, Parking parking){
+    public static void menu(Scanner in, Parking parking, Admin admin){
         int usrType = 2;
 
         System.out.println("Please enter your user type [1/2]: \n1. Admin. \n2. Custumer.");
@@ -110,10 +99,66 @@ public class Main {
 
         if(usrType == 2)
             customerMenu(in, parking);
+        else
+            adminMenu(in, admin, parking);
+    }
+
+    public static void adminMenu(Scanner in, Admin admin, Parking parking){
+        int option;
+        
+        System.out.println("Welcome, dear admin! Please, type an option to start.");
+        System.out.println("1. View free spaces.\n2. View occupied spaces. \n3. General info. \n4. Car parking info. \n5. Motorcycle parking info.");
+        option = in.nextInt();
+
+        if(option != 1 && option != 2 && option != 3 && option != 4 && option != 5){
+            System.out.println("You have choose an invalid option, so the third option is selected by default.");
+            option = 1;
+        }
+
+        cleanScreen();
+        switch(option){
+            case 1:
+                generalInfo(admin, in, parking);
+                break;
+            case 4:
+                carInfo(parking);
+                break;
+            case 5:
+                motorcycleInfo(parking);
+                break;
+            default:
+                generalInfo(admin, in, parking);
+                break;
+        }
+
+        System.out.println("Please enter a word to continue.");
+        in.next();
+        cleanScreen();
+    }
+
+    public static void motorcycleInfo(Parking parking){
+        parking.showMotorcycleParking();
+        System.out.println();
+    }
+
+    public static void carInfo(Parking parking){
+        parking.showCarParking();
+        System.out.println();
+    }
+
+    public static void generalInfo(Admin admin, Scanner in, Parking parking){
+        String selectedParking;
+
+        admin.parkingInfo(parking, in);
+        parking.showParking();
+
+        System.out.println("Select one of the spaces to view the information: ");
+        selectedParking = in.next().toUpperCase();
+        parking.parkingInfo(selectedParking);
     }
 
     public static void customerMenu(Scanner in, Parking parking){
-        int option = 1;
+        int option;
         User usr = new User();
 
         System.out.println("Welcome, dear customer! Please, type an option to start.");

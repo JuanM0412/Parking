@@ -90,17 +90,23 @@ class Parking {
         return space;
     }
 
-    public void showParking(){
+    public void showCarParking(){
         for(int i = 0; i < carSpaces.length; i++){
             System.out.print(String.format("%-3s ", "C" + i));
         }
+    }
 
-        System.out.println();
-
+    public void showMotorcycleParking(){
         for(int i = 0; i < motorcycleSpaces.length; i++){
             System.out.print(String.format("%-3s ", "M" + i));;
         }
+    }
 
+    public void showParking(){
+        showCarParking();
+        System.out.println();
+
+        showMotorcycleParking();
         System.out.println();
     }
 
