@@ -188,4 +188,17 @@ class Parking {
         if(occupiedSpaces.size() == 0)
             System.out.println("All spaces are available.");
     }
+
+    public void releaseParkingSpace(int assignedSpace, int typeOfTransport){
+        if(typeOfTransport == 1){
+            motorcycleSpaces[assignedSpace] = null;
+            freeSpacesM++;
+            occupiedSpacesM--;
+        }
+        else{
+            carSpaces[assignedSpace] = null;
+            freeSpacesC++;
+            occupiedSpacesC--;
+        }
+    }
 }

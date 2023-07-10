@@ -129,7 +129,7 @@ public class Main {
         else if(option == 2)
             userInfo(usr);
         else
-            leaveParking();
+            leaveParking(parking, usr);
     }
 
     public static void useParking(Scanner in, Parking parking, User usr){
@@ -241,7 +241,8 @@ public class Main {
         usr.userInfo(usr, vehicle);
     }
 
-    public static void leaveParking(){
+    public static void leaveParking(Parking parking, User usr){
+        parking.releaseParkingSpace(usr.getAssignedSpace(), usr.getTypeOfTransport());
         System.out.println("Thanks for using the parking!");
     }
 }
