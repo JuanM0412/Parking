@@ -21,62 +21,6 @@ public class Main {
         } while(true);
     }
 
-    public static Vehicle processOption(Scanner in, char op, User usr, Vehicle vehicle){
-        if(op == '1'){
-            vehicle = usr.setVehicle(in, vehicle, usr);
-        }
-        else if(op == '2'){
-            int typeOfTransport = usr.getTypeOfTransport();
-            String plate;
-
-            if(typeOfTransport == 0){
-                System.out.println("Enter the plate of your motorcycle: ");
-                plate = in.next().toUpperCase();
-            }
-            else{
-                System.out.println("Enter the plate of your car: ");
-                plate = in.next().toUpperCase();
-            }
-
-            vehicle.setPlate(plate);
-        }
-        else if(op == '3'){
-            String model;
-
-            in.nextLine();
-            System.out.println("Enter the model of your vehicle: ");
-            model = in.nextLine();
-            vehicle.setModel(model);
-        }
-        else if(op == '4'){
-            boolean flag;
-            String card;
-
-            in.nextLine();
-            System.out.println("Please enter your card: ");
-            card = in.nextLine();
-            flag = usr.checkCard(card);
-
-            while(flag == false){
-                System.out.println("Please enter a valid card: ");
-                card = in.nextLine();
-                flag = usr.checkCard(card);
-            }
-
-            usr.setCard(card);
-        }
-        else if(op == '5'){
-            String name;
-
-            in.nextLine();
-            System.out.println("Please enter your name: ");
-            name = in.nextLine();
-            usr.setName(name);
-        }
-
-        return vehicle;
-    }
-
     public static void cleanScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -110,23 +54,23 @@ public class Main {
         System.out.println("1. View free spaces.\n2. View occupied spaces. \n3. General info. \n4. Car parking info. \n5. Motorcycle parking info.");
         option = in.nextInt();
 
-        if(option != 1 && option != 2 && option != 3 && option != 4 && option != 5){
-            System.out.println("You have choose an invalid option, so the third option is selected by default.");
-            option = 1;
-        }
-
         cleanScreen();
         switch(option){
             case 1:
-                generalInfo(admin, in, parking);
+                parking.freeSpaces();
+                break;
+            case 2:
+                parking.occupiedSpaces();
                 break;
             case 4:
-                carInfo(parking);
+                carInfo(parking, in);
                 break;
             case 5:
-                motorcycleInfo(parking);
+                motorcycleInfo(parking, in);
                 break;
             default:
+                if(option != 3)
+                    System.out.println("You have choose an invalid option, so the third option is selected by default.");
                 generalInfo(admin, in, parking);
                 break;
         }
@@ -136,19 +80,28 @@ public class Main {
         cleanScreen();
     }
 
-    public static void motorcycleInfo(Parking parking){
+    public static void motorcycleInfo(Parking parking, Scanner in){
+        String selectedParking;
         parking.showMotorcycleParking();
         System.out.println();
+
+        System.out.println("Select one of the spaces to view the information: ");
+        selectedParking = in.next().toUpperCase();
+        parking.parkingInfo(selectedParking);
     }
 
-    public static void carInfo(Parking parking){
+    public static void carInfo(Parking parking, Scanner in){
+        String selectedParking;
         parking.showCarParking();
         System.out.println();
+
+        System.out.println("Select one of the spaces to view the information: ");
+        selectedParking = in.next().toUpperCase();
+        parking.parkingInfo(selectedParking);
     }
 
     public static void generalInfo(Admin admin, Scanner in, Parking parking){
         String selectedParking;
-
         admin.parkingInfo(parking, in);
         parking.showParking();
 
@@ -225,6 +178,62 @@ public class Main {
         System.out.println("Please enter a word to continue.");
         in.next();
         cleanScreen();
+    }
+
+    public static Vehicle processOption(Scanner in, char op, User usr, Vehicle vehicle){
+        if(op == '1'){
+            vehicle = usr.setVehicle(in, vehicle, usr);
+        }
+        else if(op == '2'){
+            int typeOfTransport = usr.getTypeOfTransport();
+            String plate;
+
+            if(typeOfTransport == 0){
+                System.out.println("Enter the plate of your motorcycle: ");
+                plate = in.next().toUpperCase();
+            }
+            else{
+                System.out.println("Enter the plate of your car: ");
+                plate = in.next().toUpperCase();
+            }
+
+            vehicle.setPlate(plate);
+        }
+        else if(op == '3'){
+            String model;
+
+            in.nextLine();
+            System.out.println("Enter the model of your vehicle: ");
+            model = in.nextLine();
+            vehicle.setModel(model);
+        }
+        else if(op == '4'){
+            boolean flag;
+            String card;
+
+            in.nextLine();
+            System.out.println("Please enter your card: ");
+            card = in.nextLine();
+            flag = usr.checkCard(card);
+
+            while(flag == false){
+                System.out.println("Please enter a valid card: ");
+                card = in.nextLine();
+                flag = usr.checkCard(card);
+            }
+
+            usr.setCard(card);
+        }
+        else if(op == '5'){
+            String name;
+
+            in.nextLine();
+            System.out.println("Please enter your name: ");
+            name = in.nextLine();
+            usr.setName(name);
+        }
+
+        return vehicle;
     }
 
     public static void userInfo(User usr){

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class Parking {
     private int freeSpacesC, occupiedSpacesC, freeSpacesM, occupiedSpacesM;
     private User carSpaces[], motorcycleSpaces[];
@@ -139,5 +141,51 @@ class Parking {
         catch(Exception e){
             System.out.println("Parking space " + selectedParking + " is free.");
         }
+    }
+
+    public void freeSpaces(){
+        ArrayList<String> freeSpaces = new ArrayList<String>();
+
+        for(int i = 0; i < carSpaces.length; i++) {
+            if(carSpaces[i] == null){
+                freeSpaces.add("C" + i);
+            }
+        }
+
+        for(int i = 0; i < carSpaces.length; i++) {
+            if(carSpaces[i] == null){
+                freeSpaces.add("M" + i);
+            }
+        }
+
+        for(String parking: freeSpaces) {
+            System.out.println(parking);
+        }
+
+        if(freeSpaces.size() == 0)
+            System.out.println("All spaces are occupied.");
+    }
+
+    public void occupiedSpaces(){
+        ArrayList<String> occupiedSpaces = new ArrayList<String>();
+
+        for(int i = 0; i < carSpaces.length; i++) {
+            if(carSpaces[i] != null){
+                occupiedSpaces.add("C" + i);
+            }
+        }
+
+        for(int i = 0; i < carSpaces.length; i++) {
+            if(carSpaces[i] != null){
+                occupiedSpaces.add("M" + i);
+            }
+        }
+
+        for(String parking: occupiedSpaces) {
+            System.out.println(parking);
+        }
+
+        if(occupiedSpaces.size() == 0)
+            System.out.println("All spaces are available.");
     }
 }
