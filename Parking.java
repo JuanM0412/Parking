@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class Parking {
     private int freeSpacesC, occupiedSpacesC, freeSpacesM, occupiedSpacesM;
     private User carSpaces[], motorcycleSpaces[];
+    ArrayList<User> registeredUsers;
 
     public Parking(){
         this.freeSpacesC = 0;
@@ -11,6 +13,7 @@ class Parking {
         this.occupiedSpacesM = 0;
         this.motorcycleSpaces = new User[0]; 
         this.carSpaces = new User[0]; 
+        this.registeredUsers = new ArrayList<User>();
     }
 
     public void setParking(int car, int mot){
@@ -62,7 +65,9 @@ class Parking {
     }
 
     public int allocateSpace(int meanOfTransport, User usr){
+        registeredUsers.add(usr);
         int space = -1;
+
         if(meanOfTransport == 0){
             for(int i = 0; i < motorcycleSpaces.length; i++){
                 if(motorcycleSpaces[i] == null){
@@ -143,7 +148,7 @@ class Parking {
         }
     }
 
-    public void freeSpaces(){
+    public void occupiedSpaces(){
         ArrayList<String> freeSpaces = new ArrayList<String>();
 
         for(int i = 0; i < carSpaces.length; i++) {
@@ -166,7 +171,7 @@ class Parking {
             System.out.println("All spaces are occupied.");
     }
 
-    public void occupiedSpaces(){
+    public void freeSpaces(){
         ArrayList<String> occupiedSpaces = new ArrayList<String>();
 
         for(int i = 0; i < carSpaces.length; i++) {
@@ -187,6 +192,28 @@ class Parking {
 
         if(occupiedSpaces.size() == 0)
             System.out.println("All spaces are available.");
+    }
+
+    public void searchUser(String card, int op, Parking parking){
+        User usr = new User();
+        boolean flag = false;
+
+        for(User tmpUser: registeredUsers){
+            if(tmpUser.getCard().equals(card)){
+                usr = tmpUser;
+                flag = true;
+                break;
+            }
+        }
+
+        if(op == 0 && flag == true){
+            releaseParkingSpace(usr.getAssignedSpace(), usr.getTypeOfTransport());
+        }
+        else if(op == 1 && flag == true){
+            usr.userInfo(usr, usr.getVehicle());
+        }
+        else
+            System.out.println("There is no customer with that card.");
     }
 
     public void releaseParkingSpace(int assignedSpace, int typeOfTransport){

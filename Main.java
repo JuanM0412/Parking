@@ -126,10 +126,16 @@ public class Main {
         cleanScreen();
         if(option == 1)
             useParking(in, parking, usr);
-        else if(option == 2)
-            userInfo(usr);
-        else
-            leaveParking(parking, usr);
+        else if(option == 2 || option == 3){
+            String card;
+
+            System.out.println("Please enter your card:");
+            card = in.next();
+            parking.searchUser(card, (option == 2) ? 1 : 0, parking);
+
+            System.out.println("Please enter a word to continue.");
+            in.next();
+        }
     }
 
     public static void useParking(Scanner in, Parking parking, User usr){
@@ -140,6 +146,7 @@ public class Main {
             
         usr.setUser(usr, in, vehicle);
         vehicle = usr.getVehicle();
+        cleanScreen();
         usr.userInfo(usr, vehicle);
 
         System.out.println("Is your information right? (Y/n): ");
@@ -234,15 +241,5 @@ public class Main {
         }
 
         return vehicle;
-    }
-
-    public static void userInfo(User usr){
-        Vehicle vehicle = usr.getVehicle();
-        usr.userInfo(usr, vehicle);
-    }
-
-    public static void leaveParking(Parking parking, User usr){
-        parking.releaseParkingSpace(usr.getAssignedSpace(), usr.getTypeOfTransport());
-        System.out.println("Thanks for using the parking!");
     }
 }
