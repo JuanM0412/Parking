@@ -1,5 +1,10 @@
+package Admin;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import User.User;
+import Vehicle.Vehicle;
 
 class Parking {
     private int freeSpacesC, occupiedSpacesC, freeSpacesM, occupiedSpacesM;

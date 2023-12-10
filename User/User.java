@@ -1,4 +1,9 @@
+package User;
+
 import java.util.Scanner;
+
+import Vehicle.*;
+import Vehicle.Vehicle;
 
 class User {
     private String card, name, typeOfTransport;

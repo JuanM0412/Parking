@@ -1,3 +1,4 @@
+package Admin;
 import java.util.Scanner;
 
 public class Admin {

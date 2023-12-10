@@ -1,6 +1,10 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Admin.*;
+import User.*;
+import Vehicle.*;
+
 public class Main {
     public static void main(String[] args) {
         Parking parking = new Parking();
@@ -47,39 +51,6 @@ public class Main {
             adminMenu(in, admin, parking);
     }
 
-    public static void adminMenu(Scanner in, Admin admin, Parking parking){
-        int option;
-        
-        System.out.println("Welcome, dear admin! Please, type an option to start.");
-        System.out.println("1. View free spaces.\n2. View occupied spaces. \n3. General info. \n4. Car parking info. \n5. Motorcycle parking info.");
-        option = in.nextInt();
-
-        cleanScreen();
-        switch(option){
-            case 1:
-                parking.freeSpaces();
-                break;
-            case 2:
-                parking.occupiedSpaces();
-                break;
-            case 4:
-                carInfo(parking, in);
-                break;
-            case 5:
-                motorcycleInfo(parking, in);
-                break;
-            default:
-                if(option != 3)
-                    System.out.println("You have choose an invalid option, so the third option is selected by default.");
-                generalInfo(admin, in, parking);
-                break;
-        }
-
-        System.out.println("Please enter a word to continue.");
-        in.next();
-        cleanScreen();
-    }
-
     public static void motorcycleInfo(Parking parking, Scanner in){
         String selectedParking;
         parking.showMotorcycleParking();
@@ -108,34 +79,6 @@ public class Main {
         System.out.println("Select one of the spaces to view the information: ");
         selectedParking = in.next().toUpperCase();
         parking.parkingInfo(selectedParking);
-    }
-
-    public static void customerMenu(Scanner in, Parking parking){
-        int option;
-        User usr = new User();
-
-        System.out.println("Welcome, dear customer! Please, type an option to start.");
-        System.out.println("1. Use the parking.\n2. View my information. \n3. Leave the parking.");
-        option = in.nextInt();
-
-        if(option != 1 && option != 2 && option != 3){
-            System.out.println("You have choose an invalid option, so the first option is selected by default.");
-            option = 1;
-        }
-
-        cleanScreen();
-        if(option == 1)
-            useParking(in, parking, usr);
-        else if(option == 2 || option == 3){
-            String card;
-
-            System.out.println("Please enter your card:");
-            card = in.next();
-            parking.searchUser(card, (option == 2) ? 1 : 0, parking);
-
-            System.out.println("Please enter a word to continue.");
-            in.next();
-        }
     }
 
     public static void useParking(Scanner in, Parking parking, User usr){
