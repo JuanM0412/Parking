@@ -6,7 +6,7 @@ import java.util.Scanner;
 import User.User;
 import Vehicle.Vehicle;
 
-class Parking {
+public class Parking {
     private int freeSpacesC, occupiedSpacesC, freeSpacesM, occupiedSpacesM;
     private User carSpaces[], motorcycleSpaces[];
     ArrayList<User> registeredUsers;

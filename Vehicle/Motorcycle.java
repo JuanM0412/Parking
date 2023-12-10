@@ -1,6 +1,6 @@
 package Vehicle;
 
-class Motorcycle extends Vehicle{
+public class Motorcycle extends Vehicle{
     @Override
     public boolean checkPlate(String plate){
         if(plate.length() != 6)

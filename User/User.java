@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Vehicle.*;
 import Vehicle.Vehicle;
 
-class User {
+public class User {
     private String card, name, typeOfTransport;
     private int assignedSpace;
     private Vehicle vehicle;
